@@ -14,9 +14,10 @@ datasource db {
 }
 
 enum Status {
-  ATIVO
-  INATIVO
-  DESATIVADO
+  ACTIVE
+  PENDING
+  INACTIVE
+  DESACTIVE
 }
 model restaurant {
   id             String @id @default(uuid()) @db.Char(36)
