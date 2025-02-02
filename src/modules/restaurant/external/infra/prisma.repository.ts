@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IRestaurantRepository } from '../../domain/repositories/restaurant.repository';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateRestaurantDTO } from '../dtos/create-restaurant.dto';
+import { ListAllRestaurantDTO } from '../dtos/list-all-restaurant.dto';
 
 @Injectable()
 export class PrismaRestaurantRepository implements IRestaurantRepository {
@@ -16,7 +17,7 @@ export class PrismaRestaurantRepository implements IRestaurantRepository {
         description: props.description,
         cnpj: props.cnpj,
         ownerRestauant: props.owner_restaurant,
-        status: 'ATIVO',
+        status: 'PENDING',
       },
     });
   }
@@ -31,5 +32,35 @@ export class PrismaRestaurantRepository implements IRestaurantRepository {
     if (!isExistEmail) return false;
 
     return true;
+  }
+
+  async findAll(): Promise<ListAllRestaurantDTO[]> {
+    const restaurantsFromDb = await this.prismaService.restaurant.findMany({
+      select: {
+        cnpj: true,
+        createdAt: true,
+        description: true,
+        email: true,
+        id: true,
+        name: true,
+        ownerRestauant: true,
+        status: true,
+      }
+    });
+
+    if (!restaurantsFromDb) return [];
+
+    return restaurantsFromDb.map((restaurant) => {
+      return {
+        id: restaurant.id,
+        name: restaurant.name,
+        cnpj: restaurant.cnpj,
+        email: restaurant.email,
+        status: restaurant.status,
+        description: restaurant.description,
+        owner_restaurant: restaurant.ownerRestauant,
+        createdAt: restaurant.createdAt,
+      }
+    })
   }
 }
