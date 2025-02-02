@@ -1,31 +1,60 @@
-// src/internal/use-cases/create-restaurant.use-case.ts
-
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, OnModuleDestroy } from '@nestjs/common';
 import { IRestaurantRepository } from '../../domain/repositories/restaurant.repository';
 import { CreateRestaurantDTO } from '../../external/dtos/create-restaurant.dto';
 import { Restaurant } from '../../domain/entities/restaurant.entity';
+import { IPasswordService } from 'src/modules/services/password.service';
 
 @Injectable()
 export class CreateRestaurantUseCase {
   constructor(
     @Inject('IRestaurantRepository')
-    private readonly prismaService: IRestaurantRepository,
+    private readonly restaurantRepository: IRestaurantRepository,
+
+    @Inject('IPasswordService')
+    private readonly passwordService: IPasswordService,
   ) {}
 
-  async execute(props: CreateRestaurantDTO): Promise<void> {
-    const verifyEmail = await this.prismaService.findByEmail(props.email);
+  async execute({
+    name,
+    email,
+    description,
+    cnpj,
+    owner_restaurant,
+  }: CreateRestaurantDTO): Promise<void> {
+    const verifyEmail = await this.restaurantRepository.findByEmail(email);
 
-    if (verifyEmail) throw new Error('Email ja cadastrado');
-
+    if (verifyEmail) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: 'Email já cadastrado',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    
     const newRestaurant = new Restaurant({
-      name: props.name,
-      password: props.password,
-      email: props.email,
-      description: props.description,
-      cnpj: props.cnpj,
-      owner_restaurant: props.owner_restaurant,
+      name,
+      email,
+      description,
+      cnpj,
+      owner_restaurant,
     });
 
-    console.log(newRestaurant);
+    const password = newRestaurant.createPassword();
+    const hashedPassword = await this.passwordService.hash(password);
+
+    newRestaurant.updatePassword(hashedPassword);
+
+    await this.restaurantRepository.create({
+      name: newRestaurant.name,
+      password: newRestaurant.password,
+      email: newRestaurant.email,
+      description: newRestaurant.description ?? 'Não informado',
+      cnpj: newRestaurant.cnpj,
+      owner_restaurant: newRestaurant.ownerRestaurant,
+    });
+
+    return
   }
 }
