@@ -9,9 +9,9 @@ import { envSchema } from './env/env';
   imports: [
     ConfigModule.forRoot({
       validate: (env) => envSchema.safeParse(env),
-      isGlobal: true
+      isGlobal: true,
     }),
-    EnvModule
+    EnvModule,
   ],
   controllers: [AppController],
   providers: [AppService],
