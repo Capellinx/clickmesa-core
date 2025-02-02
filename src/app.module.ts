@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { EnvModule } from './env/env.module';
 import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './env/env';
-import { RestaurantModule } from './restaurant/restaurant.module';
+import { RestaurantModule } from './modules/restaurant/restaurant.module';
 
 @Module({
   imports: [
