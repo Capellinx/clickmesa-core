@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CreateRestaurantUseCase } from './internal/use-cases/create-restaurant.use-case';
 import { RestaurantController } from './external/controllers/restaurant.controller';
-import { PrismaRestaurantRepository } from './infra/prisma.repository';
+import { PrismaRestaurantRepository } from './external/infra/prisma.repository';
 import { PrismaService } from 'prisma/prisma.service';
 import { BcryptService } from '../services/implementations/bcrypt.service';
 
