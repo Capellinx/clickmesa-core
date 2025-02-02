@@ -3,7 +3,7 @@ import { randomUUID as uuid } from 'crypto';
 export interface IRestaurantProps {
   id?: string;
   name: string;
-  password: string;
+  password?: string;
   email: string;
   description: string;
   cnpj: number;
@@ -44,7 +44,10 @@ export class Restaurant {
     return new Restaurant(props);
   }
 
-  // Getters
+  createPassword = () => {
+    return Math.random().toString(36).slice(2);
+  }
+
   get id(): string {
     return this._id;
   }
