@@ -4,13 +4,15 @@ import { RestaurantController } from './external/controllers/restaurant.controll
 import { PrismaRestaurantRepository } from './external/infra/prisma.repository';
 import { PrismaService } from 'prisma/prisma.service';
 import { BcryptService } from '../services/implementations/bcrypt.service';
+import { ListAllRestaurantUseCase } from './internal/use-cases/list-all-restaurant.use-case';
 
 @Module({
   controllers: [RestaurantController],
   providers: [
     PrismaService,
-    CreateRestaurantUseCase,
     BcryptService,
+    CreateRestaurantUseCase,
+    ListAllRestaurantUseCase,
     PrismaRestaurantRepository,
     {
       provide: 'IRestaurantRepository',
