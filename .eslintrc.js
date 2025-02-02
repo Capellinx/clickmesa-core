@@ -20,6 +20,17 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-explicit-any': 'on',
+    '@typescript-eslint/no-unused-vars': 'on',
+    '@typescript-eslint/no-empty-function': 'on',
+    '@typescript-eslint/ban-ts-comment': 'on',
+    '@typescript-eslint/no-namespace': 'off',
+    
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
