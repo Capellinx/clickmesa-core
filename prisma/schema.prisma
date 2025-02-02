@@ -12,15 +12,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Status {
+  ATIVO
+  INATIVO
+  DESATIVADO
+}
 model restaurant {
   id             String @id @default(uuid()) @db.Char(36)
   name           String
   email          String @unique
   password       String @db.VarChar(200)
   description    String
-  cnpj           Int    @db.Integer() @unique
+  cnpj           BigInt
   ownerRestauant String @map("owner_restauarnt")
-  status         String
+  status         Status
 
   createdAt DateTime @default(now()) @db.Timestamp()
   updatedAt DateTime @updatedAt @map("updated_at")
