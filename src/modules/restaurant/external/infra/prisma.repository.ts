@@ -45,7 +45,7 @@ export class PrismaRestaurantRepository implements IRestaurantRepository {
         name: true,
         ownerRestauant: true,
         status: true,
-      }
+      },
     });
 
     if (!restaurantsFromDb) return [];
@@ -60,7 +60,7 @@ export class PrismaRestaurantRepository implements IRestaurantRepository {
         description: restaurant.description,
         owner_restaurant: restaurant.ownerRestauant,
         createdAt: restaurant.createdAt,
-      }
-    })
+      };
+    });
   }
 }

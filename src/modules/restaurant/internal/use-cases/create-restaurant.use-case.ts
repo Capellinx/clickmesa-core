@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Inject, Injectable, OnModuleDestroy } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { IRestaurantRepository } from '../../domain/repositories/restaurant.repository';
 import { CreateRestaurantDTO } from '../../external/dtos/create-restaurant.dto';
 import { Restaurant } from '../../domain/entities/restaurant.entity';
@@ -32,7 +32,7 @@ export class CreateRestaurantUseCase {
         HttpStatus.BAD_REQUEST,
       );
     }
-    
+
     const newRestaurant = new Restaurant({
       name,
       email,
@@ -55,6 +55,6 @@ export class CreateRestaurantUseCase {
       owner_restaurant: newRestaurant.ownerRestaurant,
     });
 
-    return
+    return;
   }
 }
