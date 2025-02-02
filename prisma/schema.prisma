@@ -25,7 +25,7 @@ model restaurant {
   email          String @unique
   password       String @db.VarChar(200)
   description    String
-  cnpj           BigInt
+  cnpj           String @unique
   ownerRestauant String @map("owner_restauarnt")
   status         Status
 
