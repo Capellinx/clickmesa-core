@@ -1,0 +1,36 @@
+services:
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev  
+  #   container_name: api-clickmesa
+  #   env_file:
+  #     - .env  
+  #   ports:
+  #     - '8443:8443'
+  #   volumes:
+  #     - .:/app  
+  #   networks:
+  #     - api_network
+  #   depends_on:
+  #     - db  
+
+  db:
+    image: postgres:15 
+    container_name: db-clickmesa
+    environment:
+      POSTGRES_DB: clickmesa
+      POSTGRES_USER: clickmesa
+      POSTGRES_PASSWORD: clickmesa
+    ports:
+      - '3333:5432' 
+    # networks:
+    #   - api_network
+    volumes:
+      - db-data:/var/lib/postgresql/data 
+
+volumes:
+  db-data: {} 
+
+networks:
+  api_network: {} 
