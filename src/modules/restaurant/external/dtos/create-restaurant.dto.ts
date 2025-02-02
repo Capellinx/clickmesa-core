@@ -3,6 +3,6 @@ export class CreateRestaurantDTO {
   password: string;
   email: string;
   description?: string;
-  cnpj: number;
+  cnpj: string;
   owner_restaurant: string;
 }

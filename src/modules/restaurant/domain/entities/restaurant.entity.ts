@@ -6,7 +6,7 @@ export interface IRestaurantProps {
   password?: string;
   email: string;
   description: string;
-  cnpj: number;
+  cnpj: string;
   owner_restaurant: string;
   status?: string;
   createdAt?: Date;
@@ -19,7 +19,7 @@ export class Restaurant {
   private _password: string;
   private _email: string;
   private _description: string;
-  private _cnpj: number;
+  private _cnpj: string;
   private _ownerRestaurant: string;
   private _status: string;
   private _createdAt: Date;
@@ -46,7 +46,7 @@ export class Restaurant {
 
   createPassword = () => {
     return Math.random().toString(36).slice(2);
-  }
+  };
 
   get id(): string {
     return this._id;
@@ -68,7 +68,7 @@ export class Restaurant {
     return this._description;
   }
 
-  get cnpj(): number {
+  get cnpj(): string {
     return this._cnpj;
   }
 
