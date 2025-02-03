@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IRestaurantRepository } from '../../domain/repositories/restaurant.repository';
+import { IRestaurantRepository, Restaurant } from '../../domain/repositories/restaurant.repository';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateRestaurantDTO } from '../dtos/create-restaurant.dto';
 import { ListAllRestaurantDTO } from '../dtos/list-all-restaurant.dto';
@@ -22,16 +22,21 @@ export class PrismaRestaurantRepository implements IRestaurantRepository {
     });
   }
 
-  async findByEmail(email: string): Promise<boolean> {
+  async findByEmail(email: string): Promise<Restaurant.LoginOutput> {
     const isExistEmail = await this.prismaService.restaurant.findFirst({
       where: {
         email,
       },
     });
 
-    if (!isExistEmail) return false;
+    if (!isExistEmail) return null;
 
-    return true;
+    return {
+      id: isExistEmail.id,
+      name: isExistEmail.name,
+      email: isExistEmail.email,
+      password: isExistEmail.password
+    };
   }
 
   async findAll(): Promise<ListAllRestaurantDTO[]> {
