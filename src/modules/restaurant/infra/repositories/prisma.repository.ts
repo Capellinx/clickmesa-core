@@ -39,6 +39,7 @@ export class PrismaRestaurantRepository implements IRestaurantRepository {
       name: isExistEmail.name,
       email: isExistEmail.email,
       password: isExistEmail.password,
+      role: isExistEmail.role,
     };
   }
 
