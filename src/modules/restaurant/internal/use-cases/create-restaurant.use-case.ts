@@ -3,6 +3,7 @@ import { IRestaurantRepository } from '../../domain/repositories/restaurant.repo
 import { CreateRestaurantDTO } from '../../external/dtos/create-restaurant.dto';
 import { Restaurant } from '../../domain/entities/restaurant.entity';
 import { IPasswordService } from 'src/modules/services/password.service';
+import { SendEmailWelcomeUseCase } from './send-email-welcome.use-case';
 
 @Injectable()
 export class CreateRestaurantUseCase {
@@ -12,6 +13,8 @@ export class CreateRestaurantUseCase {
 
     @Inject('IPasswordService')
     private readonly passwordService: IPasswordService,
+
+    private readonly sendEmailWelcomeUseCase: SendEmailWelcomeUseCase,
   ) {}
 
   async execute({
@@ -53,6 +56,12 @@ export class CreateRestaurantUseCase {
       description: newRestaurant.description ?? 'Não informado',
       cnpj: newRestaurant.cnpj,
       owner_restaurant: newRestaurant.ownerRestaurant,
+    });
+
+    await this.sendEmailWelcomeUseCase.execute({
+      email: newRestaurant.email,
+      name: newRestaurant.name,
+      password,
     });
 
     return;
