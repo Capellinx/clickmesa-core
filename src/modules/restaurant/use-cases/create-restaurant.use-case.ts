@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { IRestaurantRepository } from '../../domain/repositories/restaurant.repository';
-import { CreateRestaurantDTO } from '../../infra/dtos/create-restaurant.dto';
-import { Restaurant } from '../../domain/entities/restaurant.entity';
 import { IPasswordService } from 'src/modules/services/password.service';
 import { SendEmailWelcomeUseCase } from './send-email-welcome.use-case';
+import { IRestaurantRepository } from '../domain/repositories/restaurant.repository';
+import { CreateRestaurantDTO } from '../infra/dtos/create-restaurant.dto';
+import { Restaurant } from '../domain/entities/restaurant.entity';
 
 @Injectable()
 export class CreateRestaurantUseCase {

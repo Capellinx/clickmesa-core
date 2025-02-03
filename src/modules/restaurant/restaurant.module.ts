@@ -1,19 +1,21 @@
 import { Module } from '@nestjs/common';
-import { CreateRestaurantUseCase } from './internal/use-cases/create-restaurant.use-case';
-import { RestaurantController } from './external/controllers/restaurant.controller';
-import { PrismaRestaurantRepository } from './external/infra/prisma.repository';
+import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'prisma/prisma.service';
 import { BcryptService } from '../services/implementations/bcrypt.service';
-import { ListAllRestaurantUseCase } from './internal/use-cases/list-all-restaurant.use-case';
 import { NodemailerService } from '../services/implementations/nodemailer.service';
-import { SendEmailWelcomeUseCase } from './internal/use-cases/send-email-welcome.use-case';
-import { LoginRestaurantUseCase } from './internal/use-cases/login-restaurant.use-case';
+import { RestaurantController } from './infra/controllers/restaurant.controller';
+import { PrismaRestaurantRepository } from './infra/repositories/prisma.repository';
+import { CreateRestaurantUseCase } from './use-cases/create-restaurant.use-case';
+import { ListAllRestaurantUseCase } from './use-cases/list-all-restaurant.use-case';
+import { LoginRestaurantUseCase } from './use-cases/login-restaurant.use-case';
+import { SendEmailWelcomeUseCase } from './use-cases/send-email-welcome.use-case';
 
 @Module({
   controllers: [RestaurantController],
   providers: [
     PrismaService,
     BcryptService,
+    JwtService,
     NodemailerService,
     LoginRestaurantUseCase,
     CreateRestaurantUseCase,

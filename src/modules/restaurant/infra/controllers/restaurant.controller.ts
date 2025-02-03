@@ -1,9 +1,9 @@
 import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { CreateRestaurantDTO } from '../dtos/create-restaurant.dto';
-import { CreateRestaurantUseCase } from '../../internal/use-cases/create-restaurant.use-case';
-import { ListAllRestaurantUseCase } from '../../internal/use-cases/list-all-restaurant.use-case';
 import { LoginRestaurantDTO } from '../dtos/login-restaurant.dto';
-import { LoginRestaurantUseCase } from '../../internal/use-cases/login-restaurant.use-case';
+import { CreateRestaurantUseCase } from '../../use-cases/create-restaurant.use-case';
+import { ListAllRestaurantUseCase } from '../../use-cases/list-all-restaurant.use-case';
+import { LoginRestaurantUseCase } from '../../use-cases/login-restaurant.use-case';
 
 @Controller('restaurant')
 export class RestaurantController {

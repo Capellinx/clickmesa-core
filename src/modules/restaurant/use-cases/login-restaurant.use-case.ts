@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { IRestaurantRepository } from '../../domain/repositories/restaurant.repository';
-import { LoginRestaurantDTO } from '../../infra/dtos/login-restaurant.dto';
 import { IPasswordService } from 'src/modules/services/password.service';
+import { LoginRestaurantDTO } from '../infra/dtos/login-restaurant.dto';
+import { IRestaurantRepository } from '../domain/repositories/restaurant.repository';
 
 @Injectable()
 export class LoginRestaurantUseCase {

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IRestaurantRepository } from '../../domain/repositories/restaurant.repository';
+import { IRestaurantRepository } from '../domain/repositories/restaurant.repository';
 
 @Injectable()
 export class ListAllRestaurantUseCase {
