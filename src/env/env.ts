@@ -6,6 +6,7 @@ export const envSchema = z.object({
   PORT_MAIL: z.coerce.number().describe('Porta do provider de email'),
   USER_MAIL: z.string().describe('Usuário do provider de email'),
   PASSWORD_MAIL: z.string().describe('Senha do provider de email'),
+  JWT_SECRET: z.string().describe('Secret para jwt'),
 });
 
 export type Env = z.infer<typeof envSchema>;
