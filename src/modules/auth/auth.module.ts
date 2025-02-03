@@ -33,6 +33,6 @@ import { JsonWebTokenService } from '../services/implementations/jsonwebtoken.se
       useExisting: JsonWebTokenService,
     },
   ],
-  exports: [JwtModule, PassportModule],
+  exports: [JwtModule, PassportModule, JwtStrategy],
 })
 export class AuthModule { }
