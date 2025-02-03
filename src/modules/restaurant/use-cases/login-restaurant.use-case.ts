@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { IPasswordService } from 'src/modules/services/password.service';
 import { LoginRestaurantDTO } from '../infra/dtos/login-restaurant.dto';
 import { IRestaurantRepository } from '../domain/repositories/restaurant.repository';
+import { ITokenService } from 'src/modules/services/token.service';
 
 @Injectable()
 export class LoginRestaurantUseCase {
@@ -11,6 +12,9 @@ export class LoginRestaurantUseCase {
 
     @Inject('IPasswordService')
     private readonly passwordService: IPasswordService,
+
+    @Inject('ITokenService')
+    private readonly tokenService: ITokenService,
   ) {}
 
   async execute({
@@ -44,10 +48,17 @@ export class LoginRestaurantUseCase {
       );
     }
 
+    const access_token = this.tokenService.generateToken({
+      id: restaurant.id,
+      name: restaurant.name,
+      email: restaurant.email,
+      role: restaurant.role,
+    });
+
     return {
-      statusCode: HttpStatus.OK,
-      access_token: 'oaksdoaskd',
       message: 'login efetuado com sucesso!',
+      statusCode: HttpStatus.OK,
+      access_token,
     };
   }
 }
