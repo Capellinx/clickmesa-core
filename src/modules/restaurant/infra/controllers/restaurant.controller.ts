@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { ApiSecurity } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/modules/auth/auth.guard';
+import { JwtAuthGuard } from 'src/guards/auth.guard';
 import { CreateRestaurantUseCase } from '../../use-cases/create-restaurant.use-case';
 import { ListAllRestaurantUseCase } from '../../use-cases/list-all-restaurant.use-case';
 import { LoginRestaurantUseCase } from '../../use-cases/login-restaurant.use-case';
