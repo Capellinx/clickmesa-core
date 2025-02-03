@@ -15,7 +15,7 @@ import { LoginRestaurantUseCase } from './internal/use-cases/login-restaurant.us
     PrismaService,
     BcryptService,
     NodemailerService,
-    LoginRestaurantUseCase,  
+    LoginRestaurantUseCase,
     CreateRestaurantUseCase,
     SendEmailWelcomeUseCase,
     ListAllRestaurantUseCase,

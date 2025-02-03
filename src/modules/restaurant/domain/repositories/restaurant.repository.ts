@@ -7,12 +7,11 @@ export interface IRestaurantRepository {
   findAll(): Promise<ListAllRestaurantDTO[]>;
 }
 
-
 export namespace Restaurant {
   export type LoginOutput = {
-    id: string,
-    name: string,
-    email: string,
-    password: string
-  }
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+  };
 }

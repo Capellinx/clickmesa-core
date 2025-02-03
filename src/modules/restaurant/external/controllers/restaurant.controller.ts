@@ -19,10 +19,10 @@ export class RestaurantController {
     return this.createRestaurantUseCase.execute(createRestaurantDTO);
   }
 
-  @Post("/login")
+  @Post('/login')
   @HttpCode(200)
   login(@Body() loginRestaurantDTO: LoginRestaurantDTO) {
-    return this.loginRestaurantUseCase.execute(loginRestaurantDTO)
+    return this.loginRestaurantUseCase.execute(loginRestaurantDTO);
   }
 
   @Get()

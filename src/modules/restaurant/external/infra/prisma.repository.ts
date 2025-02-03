@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { IRestaurantRepository, Restaurant } from '../../domain/repositories/restaurant.repository';
+import {
+  IRestaurantRepository,
+  Restaurant,
+} from '../../domain/repositories/restaurant.repository';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateRestaurantDTO } from '../dtos/create-restaurant.dto';
 import { ListAllRestaurantDTO } from '../dtos/list-all-restaurant.dto';
@@ -35,7 +38,7 @@ export class PrismaRestaurantRepository implements IRestaurantRepository {
       id: isExistEmail.id,
       name: isExistEmail.name,
       email: isExistEmail.email,
-      password: isExistEmail.password
+      password: isExistEmail.password,
     };
   }
 
