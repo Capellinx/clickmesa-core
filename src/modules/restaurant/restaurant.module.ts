@@ -9,6 +9,8 @@ import { CreateRestaurantUseCase } from './use-cases/create-restaurant.use-case'
 import { ListAllRestaurantUseCase } from './use-cases/list-all-restaurant.use-case';
 import { LoginRestaurantUseCase } from './use-cases/login-restaurant.use-case';
 import { SendEmailWelcomeUseCase } from './use-cases/send-email-welcome.use-case';
+import { JsonWebTokenService } from '../services/implementations/jsonwebtoken.service';
+import { ServicesModule } from '../services/services.module';
 
 @Module({
   controllers: [RestaurantController],
@@ -16,6 +18,7 @@ import { SendEmailWelcomeUseCase } from './use-cases/send-email-welcome.use-case
     PrismaService,
     BcryptService,
     JwtService,
+    JsonWebTokenService,
     NodemailerService,
     LoginRestaurantUseCase,
     CreateRestaurantUseCase,
@@ -34,6 +37,11 @@ import { SendEmailWelcomeUseCase } from './use-cases/send-email-welcome.use-case
       provide: 'IEmailService',
       useExisting: NodemailerService,
     },
+    {
+      provide: 'ITokenService',
+      useExisting: JsonWebTokenService,
+    },
   ],
+  imports: [ServicesModule],
 })
 export class RestaurantModule {}
