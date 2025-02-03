@@ -5,13 +5,17 @@ import { PrismaRestaurantRepository } from './external/infra/prisma.repository';
 import { PrismaService } from 'prisma/prisma.service';
 import { BcryptService } from '../services/implementations/bcrypt.service';
 import { ListAllRestaurantUseCase } from './internal/use-cases/list-all-restaurant.use-case';
+import { NodemailerService } from '../services/implementations/nodemailer.service';
+import { SendEmailWelcomeUseCase } from './internal/use-cases/send-email-welcome.use-case';
 
 @Module({
   controllers: [RestaurantController],
   providers: [
     PrismaService,
     BcryptService,
-    CreateRestaurantUseCase,
+    NodemailerService,
+    CreateRestaurantUseCase,  
+    SendEmailWelcomeUseCase,
     ListAllRestaurantUseCase,
     PrismaRestaurantRepository,
     {
@@ -21,6 +25,10 @@ import { ListAllRestaurantUseCase } from './internal/use-cases/list-all-restaura
     {
       provide: 'IPasswordService',
       useExisting: BcryptService,
+    },
+    {
+      provide: 'IEmailService',
+      useExisting: NodemailerService,
     },
   ],
 })
