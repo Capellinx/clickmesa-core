@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './env/env';
 import { RestaurantModule } from './modules/restaurant/restaurant.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { AuthModule } from './modules/auth/auth.module';
+import { ServicesModule } from './modules/services/services.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
     }),
     EnvModule,
     RestaurantModule,
+    AuthModule,
+    ServicesModule,
   ],
   controllers: [],
   providers: [],
