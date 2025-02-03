@@ -53,6 +53,7 @@ export class LoginRestaurantUseCase {
       name: restaurant.name,
       email: restaurant.email,
       role: restaurant.role,
+      first_login: restaurant.first_login,
     });
 
     return {
