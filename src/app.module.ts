@@ -36,4 +36,4 @@ import { ServicesModule } from './modules/services/services.module';
   controllers: [],
   providers: [],
 })
-export class AppModule implements NestModule {}
+export class AppModule {}
