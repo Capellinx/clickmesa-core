@@ -15,5 +15,6 @@ export namespace Restaurant {
     email: string;
     password: string;
     role: Role;
+    first_login: boolean;
   };
 }
