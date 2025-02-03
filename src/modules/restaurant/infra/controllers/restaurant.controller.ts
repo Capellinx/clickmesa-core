@@ -1,9 +1,11 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
-import { CreateRestaurantDTO } from '../dtos/create-restaurant.dto';
-import { LoginRestaurantDTO } from '../dtos/login-restaurant.dto';
+import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { ApiSecurity } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/modules/auth/auth.guard';
 import { CreateRestaurantUseCase } from '../../use-cases/create-restaurant.use-case';
 import { ListAllRestaurantUseCase } from '../../use-cases/list-all-restaurant.use-case';
 import { LoginRestaurantUseCase } from '../../use-cases/login-restaurant.use-case';
+import { CreateRestaurantDTO } from '../dtos/create-restaurant.dto';
+import { LoginRestaurantDTO } from '../dtos/login-restaurant.dto';
 
 @Controller('restaurant')
 export class RestaurantController {
@@ -27,6 +29,8 @@ export class RestaurantController {
 
   @Get()
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
+  @ApiSecurity('access-key')
   findAll() {
     return this.listAllRestaurantUseCase.execute();
   }
